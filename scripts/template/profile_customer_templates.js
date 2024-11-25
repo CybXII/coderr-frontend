@@ -1,4 +1,4 @@
-function getCustomerProfilePageTemplate(){
+function getCustomerProfilePageTemplate() {
     return `
                 <section id="customer" class="section_group d_flex_cc_gl f_d_c ">
 
@@ -50,14 +50,13 @@ function getCustomerProfilePageTemplate(){
     `
 }
 
-
-function getCustomerProfileTemplate(){  
-    if (!currentUser ) {
+function getCustomerProfileTemplate() {
+    if (!currentUser) {
         return `
             <div>
                 Es ist ein Fehler aufgetreten
             </div>`;
-    }  
+    }
     return `
         <button onclick="openDialog('customer_dialog')"
                     class="d_flex_cc_gl btn_round_l btn_edit abs_pos_edit_btn">
@@ -96,9 +95,7 @@ function getCustomerProfileTemplate(){
     `
 }
 
-
-
-function getCustomerDialogTemplate(){
+function getCustomerDialogTemplate() {
     return `
         <section onclick="closeDialog('customer_dialog')" id="customer_dialog"
                 class="dialog d_flex_cc_gl pad_m d_none">
@@ -107,21 +104,21 @@ function getCustomerDialogTemplate(){
     `
 }
 
-function getCustomerDialogFormTemplate(){
-    if (!currentUser ) {
+function getCustomerDialogFormTemplate() {
+    if (!currentUser) {
         return `
             <div>
                 Es ist ein Fehler aufgetreten
             </div>`;
-    }  
-    return`
+    }
+    return `
     <div onclick="stopProp(event)" class="m_auto dialog_content small_form d_flex_cc_gl f_d_c">
                     <form onsubmit="customerEditOnsubmit(event)" class="d_flex_cc_gm f_d_c w_full pos_rel">
                         <button onclick="abboardCustomerEdit()"
                             class="d_flex_cc_gl btn_round_l btn_edit abs_pos_edit_btn_m">
                             <img src="./assets/icons/close_black.svg" alt="">
                         </button>
-                        <h2 class="font_prime_color">Profil editieren</h2>
+                        <h2 class="font_prime_color p_top_s">Profil editieren</h2>
 
                         <div class="image_input_box">
                             <img id="customer_profile_img_input_output" class="profile_img_l" src="${getPersonImgPath(currentUser.file)}" alt="Aktuelles Angebotsbild">
@@ -167,7 +164,7 @@ function getCustomerOrderTemplateList() {
     return orderListHTML;
 }
 
-function getCustomerOrderTemplate(order){
+function getCustomerOrderTemplate(order) {
     business_user = getUserInfo(order.business_user)
     if (!order || typeof order !== 'object' || !order.business_user || !order.id || !order.created_at || !order.status || !order.title || !order.delivery_time_in_days || !order.revisions || !order.price) {
         return `
@@ -202,34 +199,35 @@ function getCustomerOrderTemplate(order){
                                     ${getOrderFeatureListTemplate(order.features)}
                                 </ul>
                             </div>
+                            <hr>
                         </div>
                     </li>
     `
 }
 
-function getOrderFeatureListTemplate(features){
+function getOrderFeatureListTemplate(features) {
     if (!Array.isArray(features) || features.length === 0) {
         return '<li>Keine Features verfügbar</li>';
     }
     let featureList = "";
-    
+
     features.forEach(feature => {
         featureList += `<li>${feature}</li>`
     });
     return featureList
 }
 
-function getOrderRevisionTemplate(revisions){
-    if(revisions == 0){
+function getOrderRevisionTemplate(revisions) {
+    if (revisions == 0) {
         return 'Unbegrenzte'
-    } else if(revisions == 1) {
+    } else if (revisions == 1) {
         return revisions
     } else {
         return revisions
     }
 }
 
-function getCustomerReviewDialogWrapperTemplate(){
+function getCustomerReviewDialogWrapperTemplate() {
     return `
         <section onclick="closeDialog('rating_dialog')" id="rating_dialog" class="dialog pad_m d_flex_cc_gm d_none">
                 

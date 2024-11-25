@@ -1,7 +1,6 @@
 let currentReviews = [];
 let currentReviewOrdering = '-updated_at'
 
-
 async function setReviewsForBusinessUser(id) {
     let reviewsResp = await getData(REVIEW_URL + `?business_user_id=${id}&ordering=${currentReviewOrdering}`);
     if (reviewsResp.ok) {
@@ -44,8 +43,12 @@ function openReviewEditDialog(reviewId) {
         showToastMessage(true, ['Bewertung konnte nicht gefunden werden'])
     } else {
         openDialog('rating_dialog');
-        document.getElementById('rating_dialog').innerHTML = getReviewDialogformTemplate(currentReviews[index])
+        document.getElementById('rating_dialog').innerHTML = getReviewDialogformTemplate(currentReviews[index], true)
     }
+}
+
+function openReviewDeleteDialog(reviewId) {
+    document.getElementById('rating_dialog').innerHTML = getDeleteOrNotTemplate(reviewId)
 }
 
 async function onReviewSubmit(event, reviewId) {
@@ -78,7 +81,7 @@ async function deleteReview(reviewId) {
             document.getElementById("edit_review_list").innerHTML = getReviewWLinkEditableTemplateList(currentReviews);
             closeDialog('rating_dialog');
             showToastMessage(false, ['Bewertung gelöscht'])
-        } else {            
+        } else {
             showToastMessage(true, extractErrorMessages(resp.data))
         }
     }
@@ -110,5 +113,4 @@ function meanValueReviews() {
     } else {
         return '-'
     }
-
 }

@@ -1,6 +1,8 @@
 function openDialog(id) {
     let dialogref = document.getElementById(id);
+    if (dialogref) {
     dialogref.classList.remove('d_none');
+    }
 }
 
 function closeAllOpenedElements() {
@@ -9,9 +11,9 @@ function closeAllOpenedElements() {
     openElements.forEach(element => {
         if (element.getAttribute('closable') === 'true') {
             element.setAttribute('open', 'false');
-          }
+        }
     });
-  }
+}
 
 function stopProp(event) {
     event.stopPropagation()
@@ -27,7 +29,6 @@ function toggleOpen(element) {
     element.setAttribute('open', !isOpen);
 }
 
-
 function toggleOpenId(id) {
     element = document.getElementById(id)
     const isOpen = element.getAttribute('open') === 'true';
@@ -40,8 +41,6 @@ function activateRadio(element) {
         radioInput.checked = true;
     }
 }
-
-
 
 function updateStars(star) {
     const starContainer = star.parentNode;
@@ -76,7 +75,6 @@ function formatDate(dateString) {
     const date = new Date(dateString);
     const options = { day: 'numeric', month: 'long', year: 'numeric' };
     const formattedDate = date.toLocaleDateString('de-DE', options);
-
     return formattedDate.replace(',', '');
 }
 
@@ -102,10 +100,10 @@ function getOfferImgPath(filepath) {
     }
 }
 
-function showToastMessage(error=true, msg=[]) {
+function showToastMessage(error = true, msg = []) {
     const toast = document.createElement('div');
     toast.className = 'toast_msg d_flex_cc_gm';
-    toast.innerHTML = getToastHTML(msg,error);
+    toast.innerHTML = getToastHTML(msg, error);
     toast.setAttribute('error', error);
     document.body.appendChild(toast);
 
@@ -114,11 +112,10 @@ function showToastMessage(error=true, msg=[]) {
     }, 2500);
 }
 
-
-function getToastHTML(msg,error) {
-    let msglist="";
-    if(msg.length <= 0){
-        msglist = error? "<li>Es ist ein Fehler aufgetreten</li>" : "<li>Das hat geklappt!</li>"
+function getToastHTML(msg, error) {
+    let msglist = "";
+    if (msg.length <= 0) {
+        msglist = error ? "<li>Es ist ein Fehler aufgetreten</li>" : "<li>Das hat geklappt!</li>"
     }
     for (let i = 0; i < msg.length; i++) {
         msglist += `<li>${msg[i]}</li>`
@@ -151,9 +148,8 @@ function extractErrorMessages(errorObject) {
     return errorMessages;
 }
 
-
-function toggleReviewAddBtn(){
-    if(currentUser.type == "business"){
+function toggleReviewAddBtn() {
+    if (currentUser.type == "business") {
         document.getElementById('review_add_btn').classList.add('d_none')
     }
 }

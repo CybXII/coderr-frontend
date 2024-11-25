@@ -6,7 +6,6 @@ async function setUsers() {
     if (userBusinessResp.ok) {
         globalUsers = globalUsers.concat(userBusinessResp.data);
     }
-
     let userCustomerResp = await getData(CUSTOMER_PROFILES_URL);
     if (userCustomerResp.ok) {
         globalUsers = globalUsers.concat(userCustomerResp.data);
@@ -27,5 +26,5 @@ async function setCurrentUser() {
         }
         return response;
     }
-    return {ok:false}
+    return { ok: false }
 }

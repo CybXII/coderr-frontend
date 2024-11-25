@@ -13,7 +13,7 @@ async function createOrder(detailId) {
 
         if (!orderResp.ok) {
             showToastMessage(true, extractErrorMessages(orderResp.data))
-        } 
+        }
         return orderResp
     } else {
         showToastMessage(true, ['Das Angebotsdetail konnte nicht gefunden werden'])
@@ -23,16 +23,12 @@ async function createOrder(detailId) {
 
 async function updateOrder(orderId, status) {
     let stati = ['in_progress', 'cancelled', 'completed']
-
     data = {
         status: status
     }
-
     let orderResp = await patchDataWoFiles(ORDER_URL + orderId + "/", data);
     if (!orderResp.ok) {
         showToastMessage(true, extractErrorMessages(orderResp.data))
     }
     return orderResp
-
-
 }

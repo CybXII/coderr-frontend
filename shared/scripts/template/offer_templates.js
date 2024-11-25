@@ -13,7 +13,7 @@ function getOfferTemplateList(offers){
 }
 
 function getEmptyOfferListTemplate(){
-    return '<p>Wir konnten keine Angebote finden</p>'
+    return '<p>Es wurden keine Angebote gefunden!</p>'
 }
 
 function getOfferPagination(currentMax, currentPage){
@@ -66,7 +66,7 @@ function getOfferTemplate(offer){
                 <div onclick="redirectToOffer(${offer.id})" class="offer_card d_flex_cs_gm f_d_c">
                     <img class="offer_image" src="${getOfferImgPath(offer.image)}" alt="Angebotsbild">
                     <div class="d_flex_cs_gm f_d_c">
-                        <h3>${offer.title}</h3>
+                        <h3 class="text_ellipsis">${offer.title}</h3>
                         <p>${offer.description}</p>
                         <p>${getUpdateOrCreateDate(offer)}</p>
                         <div class="d_flex_cs_gm f_d_c">
@@ -91,7 +91,6 @@ function getUpdateOrCreateDate(offer){
     }
 }
 
-
 function getBusinessOfferTemplate(offer) {
     if (!offer || typeof offer !== 'object' || !offer.id || !offer.title || !offer.description) {
         return '<p>Fehler beim Laden des Angebots</p>';
@@ -112,9 +111,6 @@ function getBusinessOfferTemplate(offer) {
                     </div>
     `
 }
-
-
-// Dialogs
 
 function getOfferDialogWrapperTemplate() {
     return `
@@ -196,10 +192,6 @@ function getOfferDetailDialogTemplateList() {
 }
 
 function getOfferDetailDialogTemplate(detail) {
-    if (!detail || typeof detail !== 'object' || !detail.offer_type || !detail.title || !detail.price || !detail.delivery_time_in_days) {
-        return '<p>Fehler beim Laden der Angebotsdetails</p>';
-    }
-
     let checked = detail.revisions == -1 ? "checked" : "";
     let revisionsCount = detail.revisions <= 0 ? 0 : detail.revisions;
     let revisionsDisabled = detail.revisions == null || detail.revisions > 0 ? "" : "disabled";
@@ -264,8 +256,6 @@ function getOfferDetailDialogTemplate(detail) {
                             </div>
                         </section>`
 }
-
-
 
 function getOfferDetailFeatureTemplateList(detail) {
     if (!detail || typeof detail !== 'object' || !Array.isArray(detail.features)) {

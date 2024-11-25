@@ -1,12 +1,11 @@
 let currentFile;
 let currentFileId;
 
-function clickFileInput(id){
+function clickFileInput(id) {
     const fileInput = document.getElementById(id);
     currentFileId = id + "_output";
     fileInput.click();
 }
-
 
 async function changeCurrentFiles(element) {
     if (element.files.length > 0) {
@@ -16,27 +15,25 @@ async function changeCurrentFiles(element) {
             const imgElement = document.getElementById(currentFileId);
             const reader = new FileReader();
 
-            reader.onload = function(e) {
+            reader.onload = function (e) {
                 imgElement.src = e.target.result;
                 currentFileId = null;
             };
 
             reader.readAsDataURL(currentFile);
         } else {
-            showToastMessage(error=true, msg=["falsches Dateiformat, bitte nur jpg, jpeg oder png"])
+            showToastMessage(error = true, msg = ["falsches Dateiformat, bitte nur jpg, jpeg oder png"])
         }
     }
 }
 
-
-function getFormData(form){
-    const formData = new FormData(form); 
+function getFormData(form) {
+    const formData = new FormData(form);
 
     return Object.fromEntries(formData.entries());
 }
 
-
-function showFormErrors(idArr){
+function showFormErrors(idArr) {
     idArr.forEach(id => {
         const element = document.getElementById(id);
         if (element) {
@@ -45,15 +42,15 @@ function showFormErrors(idArr){
     });
 }
 
-function hideAllFormErrors(){
+function hideAllFormErrors() {
     const errorElements = document.querySelectorAll('.form_error');
     errorElements.forEach(element => {
         element.classList.add('d_none');
     });
 }
 
-function hideFormErrors(idArr){
-    
+function hideFormErrors(idArr) {
+
     idArr.forEach(id => {
         const element = document.getElementById(id);
         if (element) {

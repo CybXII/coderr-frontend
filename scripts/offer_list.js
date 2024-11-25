@@ -37,16 +37,31 @@ async function updateOfferListFilter() {
     renderOfferList()
 }
 
-
 async function updateOfferListFilterMaxDeliveryTime() {
     currentOfferListFilter.max_delivery_time = currentmaxDeliveryTime;
     updateOfferListFilter()
 }
 
-async function updateOfferListFilterSearch(){
+async function updateOfferListFilterSearch() {
     currentOfferListFilter.search = document.getElementById("offer_list_searchbar").value;
     updateOfferListFilter()
 }
+
+document.addEventListener("keydown", function (event) {
+
+    const field = document.getElementById("index_search_field");
+    const fieldList = document.getElementById("offer_list_searchbar");
+
+    if ((field) && document.activeElement === (field) && event.key === "Enter") {
+        event.preventDefault();
+        redirectToOfferListWSearch();
+    }
+
+    else if ((fieldList) && document.activeElement === (fieldList) && event.key === "Enter") {
+        event.preventDefault();
+        updateOfferListFilterSearch();
+    }
+});
 
 function setGreetingsSection() {
     if (currentUser) {
@@ -69,7 +84,7 @@ function offerListDeactivateAllRadio() {
 
 function offerListAbboardDeliveryTime() {
     offerListDeactivateAllRadio();
-    currentmaxDeliveryTime = ''; 
+    currentmaxDeliveryTime = '';
     updateOfferListFilterMaxDeliveryTime();
     toggleOpenId('time_filter');
 }

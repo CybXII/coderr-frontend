@@ -7,7 +7,7 @@ let currentOfferBusinessProfileFilter = {
 async function loadRenderOffers() {
     currentOfferBusinessProfileFilter.creator_id = currentBusinessUser.user;
     await setOffersWODetails(currentOfferBusinessProfileFilter);
-    document.getElementById('business_profile_offer_list').innerHTML = getOfferTemplateList(currentOffers)  + getOfferPagination(calculateNumPages(allOffersLength, PAGE_SIZE), currentOfferBusinessProfileFilter.page);
+    document.getElementById('business_profile_offer_list').innerHTML = getOfferTemplateList(currentOffers) + getOfferPagination(calculateNumPages(allOffersLength, PAGE_SIZE), currentOfferBusinessProfileFilter.page);
 }
 
 async function goToOfferPage(pageNum) {
@@ -21,10 +21,10 @@ async function initBProfile() {
     let response = await setCurrentUser();
     setHeader();
     if (!response.ok) {
-        window.location.href = "./login.html";       
+        window.location.href = "./login.html";
     } else {
         await loadBusinessUser();
-        currentOfferBusinessProfileFilter.creator_id = currentBusinessUser.user        
+        currentOfferBusinessProfileFilter.creator_id = currentBusinessUser.user
         document.getElementById('business_profile_personal_data').innerHTML = getBusinessProfileDataTmplate();
         await setUsers();
         await loadRenderBusinessReviews();
@@ -34,10 +34,9 @@ async function initBProfile() {
     }
 }
 
-
-async function loadRenderBusinessBaseInfo(){
+async function loadRenderBusinessBaseInfo() {
     let resp = await setSingleOfferCompletedCount(currentBusinessUser.user);
-    if(resp.ok){
+    if (resp.ok) {
         document.getElementById("business_profile_project_count").innerText = resp.data.completed_order_count
     }
     document.getElementById("business_profile_avg_rating").innerHTML = `${meanValueReviews()}<img src="./assets/icons/kid_star.svg" alt="" srcset="">`;
@@ -66,14 +65,12 @@ async function loadBusinessUser() {
     }
 }
 
-
-
 async function loadRenderBusinessReviews() {
     await setReviewsForBusinessUser(currentBusinessUser.user);
     document.getElementById('business_profile_review_list').innerHTML = getReviewWLinkTemplateList(currentReviews);
 }
 
-async function changeReviewFilterBusinessProfile(element){
+async function changeReviewFilterBusinessProfile(element) {
     currentReviewOrdering = element.value;
     loadRenderBusinessReviews()
 }
